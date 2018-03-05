@@ -3,8 +3,8 @@ FROM arete74/voidlinux
 RUN useradd -d /var/www/html -r -s /bin/false -U http
 RUN  /usr/bin/xbps-install -Syu &&  /usr/bin/xbps-install -Syu nginx
 
-COPY nginx.php-fpm.conf  /etc/nginx/nginx.conf
-#COPY nginx.vh.default.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf  /etc/nginx/nginx.conf
+COPY nginx.vh.default.conf /etc/nginx/conf.d/default.conf
 
 
 

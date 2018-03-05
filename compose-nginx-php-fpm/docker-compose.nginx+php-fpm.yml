@@ -1,0 +1,48 @@
+{
+    "version": "3",
+    "volumes": {
+        "postgres_data": {}
+    },
+    "services": {
+        "postgres": {
+            "image": "postgres:alpine",
+            "volumes": [
+                "postgres_data:/var/lib/postgresql/data/"
+            ],
+              "ports": [
+               "5431:5432"
+            ]
+        },
+        "php-fpm": {
+            "build": {
+                "context": "../php-fpm",
+                "dockerfile": "Dockerfile"
+            },
+            "volumes": [
+                "./app/:/var/www/html/"
+            ],
+            "ports": [
+                  "9000:9000"
+              ],
+            "depends_on": [
+                "postgres"
+            ]
+        },
+        "nginx": {
+            "build": {
+                "context": "../nginx",
+                "dockerfile": "Dockerfile"
+              },
+              "volumes": [
+                "./app/:/var/www/html/",
+                "./nginx.php-fpm.conf:/etc/nginx/nginx.conf:ro"
+            ],
+            "ports": [
+                "80:80"
+            ],
+            "depends_on": [
+                "php-fpm"
+            ]
+        }
+    }
+}
