@@ -1,0 +1,1 @@
+docker run --rm -v /home/arete/dev/docker/docker-images/php-fpm/php:/etc/php -it php-fpm
