@@ -1,1 +1,4 @@
---cap-add=SYS_ADMIN
+# use ./run pkgname
+docker run --rm --user "$(id -u):$(id -g)" --cap-add=SYS_ADMIN -v /home/arete/dev/void-packages:/repo  xbps
+
+ 
